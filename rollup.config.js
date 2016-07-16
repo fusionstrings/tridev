@@ -13,7 +13,7 @@ export default {
 		{
 			dest: pkg.main,
 			format: 'umd',
-			moduleName: 'registryGulp',
+			moduleName: 'tridev',
 			sourceMap: true
 		},
 		{
