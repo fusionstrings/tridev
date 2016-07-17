@@ -45,19 +45,32 @@ function registryCore(config) {
 		gulp.task('serve', gulp.series(
 			'build:dev',
 			'server',
+			this.watchServe
+		));
+
+		gulp.task('watch', gulp.series(
 			this.watch
 		));
 
 		gulp.task('default', gulp.series('build'));
 	};
 
+	this.watchServe = () => {
+		const {config, gulp} = this;
+		const {paths} = config;
+
+		gulp.watch(paths.styles.watch, gulp.series('style', 'reload'));
+		gulp.watch([...paths.templates.srcCore, ...paths.templates.src], gulp.series('template:dev', 'reload'));
+		gulp.watch(paths.images.src, gulp.series('images', 'reload'));
+	};
+
 	this.watch = () => {
 		const {config, gulp} = this;
 		const {paths} = config;
 
-		gulp.watch(paths.styles.watch, gulp.series(style, 'reload'));
-		gulp.watch([...paths.templates.srcCore, ...paths.templates.src], gulp.series('template:dev', 'reload'));
-		gulp.watch(paths.images.src, gulp.series(images, 'reload'));
+		gulp.watch(paths.styles.watch, gulp.series('style'));
+		gulp.watch([...paths.templates.srcCore, ...paths.templates.src], gulp.series('template'));
+		gulp.watch(paths.images.src, gulp.series('images'));
 	};
 }
 

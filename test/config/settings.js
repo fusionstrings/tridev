@@ -12,9 +12,10 @@ const dest = 'dist';
 const settings = {
 	paths: {
 		dest,
-		root: './../../test',
+		root: './../test',
 		styles: {
 			src: [`${src}/scss/style.scss`],
+			watch: [`${src}/scss/**/*.scss`],
 			dest: `${dest}/styles/`
 		},
 		templates: {
