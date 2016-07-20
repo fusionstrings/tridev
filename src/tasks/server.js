@@ -5,9 +5,15 @@ import registry from 'undertaker-registry';
 
 function server(config) {
 	const {paths} = config;
-	const pkg = require(path.join(__dirname, paths.root, 'package.json'));
 
-	const server = browserSync.create();
+	// check paths
+	if (!paths || !paths.dest || !paths.temp) {
+		throw new Error('BrowserSync Server: paths not defined');
+	}
+
+	const pkg = require(path.join(paths.root, 'package.json'));
+
+	const server = browserSync.create(pkg.name);
 	const serverDefaults = {
 		server: {
 			baseDir: [
@@ -20,11 +26,6 @@ function server(config) {
 
 	const serverOptions = (config.options || {}).server || {};
 	const serverConfig = Object.assign({}, serverDefaults, serverOptions);
-
-	// check paths
-	if (!paths || !paths.dest || !paths.temp) {
-		throw new Error('BrowserSync Server: paths not defined');
-	}
 
 	registry.call(this);
 
@@ -44,8 +45,9 @@ function server(config) {
 	/**
 	* serves the application
 	*/
-	this.server = () => {
+	this.server = cb => {
 		server.init(serverConfig);
+		cb();
 	};
 }
 

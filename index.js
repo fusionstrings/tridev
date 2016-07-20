@@ -69,7 +69,7 @@ function registryCore(config) {
 		const {paths} = config;
 
 		gulp.watch(paths.styles.watch, gulp.series('style'));
-		gulp.watch([...paths.templates.srcCore, ...paths.templates.src], gulp.series('template'));
+		gulp.watch([...paths.templates.srcCore, ...paths.templates.src], gulp.series('template:dev'));
 		gulp.watch(paths.images.src, gulp.series('images'));
 	};
 }
