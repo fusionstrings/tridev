@@ -1,4 +1,4 @@
-import path from 'path';
+import {join} from 'path';
 import util from 'util';
 import browserSync from 'browser-sync';
 import registry from 'undertaker-registry';
@@ -11,9 +11,9 @@ function server(config) {
 		throw new Error('BrowserSync Server: paths not defined');
 	}
 
-	const pkg = require(path.join(paths.root, 'package.json'));
+	const pkgName = require(join(paths.root, 'package.json')).name;
 
-	const server = browserSync.create(pkg.name);
+	const server = browserSync.create(pkgName);
 	const serverDefaults = {
 		server: {
 			baseDir: [
@@ -21,7 +21,7 @@ function server(config) {
 				paths.temp
 			]
 		},
-		logPrefix: pkg.name
+		logPrefix: pkgName
 	};
 
 	const serverOptions = (config.options || {}).server || {};

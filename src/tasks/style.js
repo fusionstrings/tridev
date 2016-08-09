@@ -1,3 +1,4 @@
+import {join} from 'path';
 import util from 'util';
 import moduleImporter from 'sass-module-importer';
 import registry from 'undertaker-registry';
@@ -29,10 +30,12 @@ const sassConfig = {
 };
 
 function style(config = {}) {
-	const {paths: {styles}} = config;
+	const {paths: {styles, root}} = config;
+
+	const pkgName = require(join(root, 'package.json')).name;
 
 	if (!styles) {
-		throw new Error('Style Registry: path not defined');
+		throw new Error(`Style Registry ${pkgName}: path not defined`);
 	}
 
 	registry.call(this);
@@ -66,7 +69,7 @@ function style(config = {}) {
 			// cssnano()
 		]))
 		.pipe($.sourcemaps.write(...sourcemapsConfig))
-		.pipe($.size({title: 'styles'}))
+		.pipe($.size({title: `Compile and copy sass for ${pkgName}`}))
 		.pipe(dest(styles.dest));
 	};
 }

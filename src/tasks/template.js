@@ -1,3 +1,4 @@
+import {join} from 'path';
 import util from 'util';
 import registry from 'undertaker-registry';
 import gulpLoadPlugins from 'gulp-load-plugins';
@@ -8,7 +9,9 @@ const templateConfig = {
 };
 
 function template(config) {
-	const {paths: {templates}} = config;
+	const {paths: {templates, root}} = config;
+
+	const pkgName = require(join(root, 'package.json')).name;
 
 	registry.call(this);
 
@@ -29,17 +32,21 @@ function template(config) {
 		}
 
 		return src(templates.srcCore)
-		.pipe($.size({title: 'templates'}))
+		.pipe($.size({title: `Copy external templates for ${pkgName}`}))
 		.pipe(dest(templates.dest));
 	};
+
+	this.templateCopy.displayName = `Copy external templates for ${pkgName}`;
 
 	this.templateOverwrite = () => {
 		const {gulp: {src, dest}} = this;
 
 		return src(templates.src)
-		.pipe($.size({title: 'templates overwrite'}))
+		.pipe($.size({title: `Copy source templates of ${pkgName}`}))
 		.pipe(dest(templates.dest));
 	};
+
+	this.templateOverwrite.displayName = `Copy source templates of ${pkgName}`;
 
 	this.useref = () => {
 		const {gulp: {src, dest}} = this;
@@ -54,14 +61,14 @@ function template(config) {
 		const {gulp: {src, dest}} = this;
 
 		if (!templates.staticBuildSrc) {
-			console.info('No source specified. Nothing to build!');
+			console.info(`No source specified. Nothing to build!: ${pkgName}`);
 			cb();
 			return;
 		}
 
 		return src(templates.staticBuildSrc, {base: templates.dest})
 		.pipe($.mustache(templates.data, templateConfig))
-		.pipe($.size({title: 'Static templates'}))
+		.pipe($.size({title: `Static templates: ${pkgName}`}))
 		.pipe(dest(templates.temp));
 	};
 
@@ -76,7 +83,7 @@ function template(config) {
 
 		return src(`${templates.dest}/**/*`)
 		.pipe($.replace(templates.path, templates.publicPath))
-		.pipe($.size({title: 'templates alt destination'}))
+		.pipe($.size({title: `templates alt destination ${pkgName}`}))
 		.pipe(dest(templates.altDest));
 	};
 }
