@@ -1,73 +1,37 @@
 {
   "name": "tridev",
-  "version": "0.1.0-alpha.10",
-  "description": "Gulp Registry",
+  "version": "0.1.0-alpha.11",
+  "description": "Web development CLI and toolbox",
   "homepage": "https://github.com/fusionstrings/tridev#readme",
   "bugs": {
     "url": "https://github.com/fusionstrings/tridev/issues"
   },
   "license": "GPL-3.0",
   "author": "Dilip Kr. Shukla",
-  "files": [
-    "dist"
-  ],
-  "main": "dist/index.js",
-  "jsnext:main": "dist/index.mjs",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fusionstrings/tridev.git"
   },
-  "scripts": {
-    "cli": "node cli",
-    "clirun": "npm run cli -- frontend='run'",
-    "clean": "rimraf dist build",
-    "compile": "npm run clean && rollup -c",
-    "watch": "rollup -c -w",
-    "prepublish": "npm run compile",
-    "start": "babel-node ."
-  },
-  "config": {
-    "frontend": "config"
-  },
+  "scripts": {},
   "dependencies": {
-    "autoprefixer": "^6.4.0",
-    "browser-sync": "^2.14.0",
-    "del": "^2.2.1",
-    "doiuse": "^2.3.0",
-    "gulp-autoprefixer": "^3.1.0",
-    "gulp-cssnano": "^2.1.2",
-    "gulp-if": "^2.0.1",
-    "gulp-imagemin": "^3.0.2",
-    "gulp-load-plugins": "^1.2.4",
-    "gulp-mustache": "^2.2.0",
-    "gulp-newer": "^1.2.0",
-    "gulp-postcss": "^6.1.1",
-    "gulp-replace": "^0.5.4",
-    "gulp-sass": "^2.3.2",
-    "gulp-size": "^2.1.0",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-useref": "^3.1.0",
-    "lodash.defaultsdeep": "^4.5.1",
-    "sass-module-importer": "^1.2.1",
-    "through2": "^2.0.1",
-    "undertaker-registry": "^1.0.0"
+    "@babel/core": "^7.0.0-beta.42",
+    "@fusionstrings/babel-preset-fusionstrings": "^1.1.1",
+    "@fusionstrings/eslint-config": "^1.2.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^8.2.2",
+    "babel-jest": "^22.4.3",
+    "eslint": "^4.19.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.7.0",
+    "jest": "^22.4.3",
+    "jest-fetch-mock": "^1.5.0",
+    "prettier": "^1.11.1",
+    "prettier-eslint": "^8.8.1",
+    "rollup": "^0.57.1",
+    "rollup-plugin-babel": "^4.0.0-beta.3",
+    "rollup-plugin-commonjs": "^9.1.0",
+    "rollup-plugin-node-resolve": "^3.3.0"
   },
-  "devDependencies": {
-    "babel-cli": "^6.11.4",
-    "babel-plugin-transform-es2015-function-name": "^6.9.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.11.5",
-    "babel-plugin-transform-object-rest-spread": "^6.8.0",
-    "babel-preset-es2015-rollup": "^1.1.1",
-    "babel-preset-es2016": "^6.11.3",
-    "babel-register": "^6.11.6",
-    "babelrc-rollup": "^2.0.0",
-    "rimraf": "^2.5.4",
-    "rollup": "^0.34.3",
-    "rollup-plugin-babel": "^2.6.1",
-    "rollup-watch": "^2.5.0",
-    "xo": "^0.16.0"
-  },
-  "xo": {
-    "esnext": true
-  }
+  "devDependencies": {}
 }

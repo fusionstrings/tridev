@@ -1,2 +1,2 @@
-# registry-gulp
-Gulp registry
+# tridev
+Web development CLI and toolbox
