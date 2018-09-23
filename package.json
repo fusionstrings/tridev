@@ -14,7 +14,7 @@
   },
   "scripts": {},
   "dependencies": {
-    "@fusionstrings/babel-preset-fusionstrings": "^2.0.1",
+    "@fusionstrings/babel-preset-fusionstrings": "^2.0.2",
     "@fusionstrings/browserslist-config": "^1.0.1",
     "@fusionstrings/eslint-config": "^1.2.2",
     "browserslist": "^4.1.1",
